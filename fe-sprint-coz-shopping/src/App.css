@@ -16,6 +16,17 @@ a {
 
 /*Footer CSS*/
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin-bottom: 0.6rem;
+  border-top: solid 1px rgb(176, 176, 176);
+  font-size: 12px;
+}
+
 footer > div {
   display: flex;
   flex-direction: row;
@@ -27,7 +38,15 @@ footer > div > a,
 p {
   text-decoration: none;
   color: gray;
+  margin: 0;
 }
+
+.footer--aTag {
+  margin-top: 0.6rem;
+  bottom: 0;
+}
+
+/* Header CSS */
 
 header {
   width: 100%;
