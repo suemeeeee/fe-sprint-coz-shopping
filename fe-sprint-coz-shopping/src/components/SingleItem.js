@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { FaStar } from "react-icons/fa";
 
 const ItemImage = styled.img`
   object-fit: cover;
@@ -41,8 +42,31 @@ const ExhibitionItem = styled.div`
     }
   }
 `;
-export default function SingleItem({ item }) {
+
+export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
   const [isBookmark, setIsBookmark] = useState(false);
+
+  useEffect(() => {
+    if (item && bookmarkDatas.includes(item.id)) {
+      setIsBookmark(true);
+    } else {
+      setIsBookmark(false);
+    }
+  }, []);
+
+  const handleBookmarkClick = (e) => {
+    setIsBookmark(!isBookmark);
+    const newBookmarkItem = e.currentTarget.getAttribute("value");
+
+    if (!bookmarkDatas.includes(newBookmarkItem)) {
+      setBookmarkDatas([...bookmarkDatas, newBookmarkItem]);
+    } else {
+      const deletedBookmarkDatas = bookmarkDatas.filter((item) => {
+        return item !== newBookmarkItem;
+      });
+      setBookmarkDatas(deletedBookmarkDatas);
+    }
+  };
 
   return (
     <div>
@@ -52,6 +76,13 @@ export default function SingleItem({ item }) {
             className="singleItem--img"
             src={item.image_url}
             alt="아이템 이미지"
+          />
+          <FaStar
+            className="bookmark--icon"
+            size="25"
+            color={isBookmark ? "#FFD361" : "#DFDFDF"}
+            onClick={handleBookmarkClick}
+            value={item.id}
           />
           <ItemTitleContainer>
             <p>{item.title}</p>

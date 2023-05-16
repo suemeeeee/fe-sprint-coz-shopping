@@ -4,6 +4,7 @@ import SingleItem from "../components/SingleItem";
 
 export default function Main() {
   const [itemDatas, setItemDatas] = useState([]);
+  const [bookmarkDatas, setBookmarkDatas] = useState([]);
 
   useEffect(() => {
     axios
@@ -18,11 +19,16 @@ export default function Main() {
   }, []);
 
   console.log(itemDatas);
+  console.log(bookmarkDatas);
 
   return (
     <div>
       hello
-      <SingleItem item={itemDatas[0]} />
+      <SingleItem
+        item={itemDatas[0]}
+        bookmarkDatas={bookmarkDatas}
+        setBookmarkDatas={setBookmarkDatas}
+      />
     </div>
   );
 }
