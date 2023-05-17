@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import SingleItem from "../components/SingleItem";
+import ItemListSection from "../components/ItemListSection";
 
-export default function Main() {
+export default function Main({ bookmarkDatas, setBookmarkDatas }) {
   const [itemDatas, setItemDatas] = useState([]);
-  const [bookmarkDatas, setBookmarkDatas] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://cozshopping.codestates-seb.link/api/v1/products")
+      .get("http://cozshopping.codestates-seb.link/api/v1/products?count=4")
       .then((res) => {
         console.log(res);
         setItemDatas(res.data);
@@ -18,17 +17,20 @@ export default function Main() {
       });
   }, []);
 
-  console.log(itemDatas);
-  console.log(bookmarkDatas);
-
   return (
     <div>
-      hello
-      <SingleItem
-        item={itemDatas[0]}
+      <ItemListSection
+        sectionTitle="상품 리스트"
+        items={itemDatas}
         bookmarkDatas={bookmarkDatas}
         setBookmarkDatas={setBookmarkDatas}
-      />
+      ></ItemListSection>
+      <ItemListSection
+        sectionTitle="북마크 리스트"
+        items={bookmarkDatas.slice(0, 5)}
+        bookmarkDatas={bookmarkDatas}
+        setBookmarkDatas={setBookmarkDatas}
+      ></ItemListSection>
     </div>
   );
 }
