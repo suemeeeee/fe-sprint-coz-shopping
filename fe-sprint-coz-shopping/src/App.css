@@ -14,6 +14,13 @@ a {
   text-decoration: none;
 }
 
+/* global value */
+
+:root {
+  --bookmarked: #ffd361;
+  --notBookmarked: #dfdfdf;
+}
+
 /*Footer CSS*/
 
 footer {
@@ -109,6 +116,7 @@ header {
   position: absolute;
   top: 4rem;
   right: 1rem;
+  z-index: 30;
 }
 
 .header--menu--dropdown button {
@@ -139,8 +147,16 @@ header {
   text-align: left;
 }
 
+.img--div {
+  position: relative;
+}
 .bookmark--icon {
   position: absolute;
-  left: 230px;
-  top: 268px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.type--button--div {
+  display: flex;
+  flex-direction: row;
 }

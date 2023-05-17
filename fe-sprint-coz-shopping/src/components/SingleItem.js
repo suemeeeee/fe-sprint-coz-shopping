@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 
+const SingleItemContainer = styled.div`
+  padding: 1rem;
+`;
+
 const ItemImage = styled.img`
   object-fit: cover;
   width: 264px;
@@ -34,6 +38,8 @@ const ItemPriceAndFollower = styled(ItemTitleContainer)`
 `;
 
 const ExhibitionItem = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 264px;
   p {
     &:first-child {
@@ -46,6 +52,13 @@ const ExhibitionItem = styled.div`
 export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
   const [isBookmark, setIsBookmark] = useState(false);
 
+  const type = {
+    PRODUCT: "Product",
+    CATEGORY: "Category",
+    EXHIBITION: "Exhibition",
+    BRAND: "Brand",
+  };
+
   useEffect(() => {
     if (item && bookmarkDatas.includes(item.id)) {
       setIsBookmark(true);
@@ -56,34 +69,68 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
 
   const handleBookmarkClick = (e) => {
     setIsBookmark(!isBookmark);
-    const newBookmarkItem = e.currentTarget.getAttribute("value");
 
-    if (!bookmarkDatas.includes(newBookmarkItem)) {
-      setBookmarkDatas([...bookmarkDatas, newBookmarkItem]);
+    let itemIdx = undefined;
+    console.log(bookmarkDatas.length, item.id);
+
+    if (bookmarkDatas.length === 0) {
+      setBookmarkDatas([
+        ...bookmarkDatas,
+        {
+          id: item.id,
+          type: item.type,
+          title: item.title,
+          sub_title: item.sub_title,
+          brand_name: item.brand_name,
+          price: item.price,
+          discountPercentage: item.discountPercentage,
+          image_url: item.image_url,
+          brand_image_url: item.brand_image_url,
+          follower: item.follower,
+        },
+      ]);
     } else {
-      const deletedBookmarkDatas = bookmarkDatas.filter((item) => {
-        return item !== newBookmarkItem;
-      });
-      setBookmarkDatas(deletedBookmarkDatas);
+      for (let i = 0; i < bookmarkDatas.length; i++) {
+        console.log(bookmarkDatas[i].id);
+        if (bookmarkDatas[i].id === item.id) {
+          setBookmarkDatas(bookmarkDatas.filter((el) => el.id !== item.id));
+          itemIdx = i;
+          break;
+        }
+      }
+      if (itemIdx === undefined) {
+        setBookmarkDatas([
+          ...bookmarkDatas,
+          {
+            id: item.id,
+            type: item.type,
+            title: item.title,
+            sub_title: item.sub_title,
+            brand_name: item.brand_name,
+            price: item.price,
+            discountPercentage: item.discountPercentage,
+            image_url: item.image_url,
+            brand_image_url: item.brand_image_url,
+            follower: item.follower,
+          },
+        ]);
+      }
     }
   };
 
   return (
-    <div>
-      {item && item.type === "Product" && (
-        <div key={item.id}>
-          <ItemImage
-            className="singleItem--img"
-            src={item.image_url}
-            alt="아이템 이미지"
-          />
-          <FaStar
-            className="bookmark--icon"
-            size="25"
-            color={isBookmark ? "#FFD361" : "#DFDFDF"}
-            onClick={handleBookmarkClick}
-            value={item.id}
-          />
+    <>
+      {item && item.type === type.PRODUCT && (
+        <SingleItemContainer key={item.id}>
+          <div className="img--div">
+            <ItemImage src={item.image_url} alt="아이템 이미지" />
+            <FaStar
+              className="bookmark--icon"
+              size="25"
+              color={isBookmark ? "#ffd361" : "#dfdfdf"}
+              onClick={handleBookmarkClick}
+            />
+          </div>
           <ItemTitleContainer>
             <p>{item.title}</p>
             <p className="discount--percentage">{item.discountPercentage}%</p>
@@ -91,40 +138,55 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
           <ItemPriceAndFollower>
             <p>{Number(item.price).toLocaleString("ko-KR")}원</p>
           </ItemPriceAndFollower>
-        </div>
+        </SingleItemContainer>
       )}
-      {item && item.type === "Category" && (
-        <div key={item.id}>
-          <ItemImage
-            className="singleItem--img"
-            src={item.image_url}
-            alt="아이템 이미지"
-          />
+      {item && item.type === type.CATEGORY && (
+        <SingleItemContainer key={item.id}>
+          <div className="img--div">
+            <ItemImage src={item.image_url} alt="아이템 이미지" />
+            <FaStar
+              className="bookmark--icon"
+              size="25"
+              color={isBookmark ? "#ffd361" : "#dfdfdf"}
+              onClick={handleBookmarkClick}
+              value={item.id}
+            />
+          </div>
           <ItemTitleContainer>
             <p># {item.title}</p>
           </ItemTitleContainer>
-        </div>
+        </SingleItemContainer>
       )}
-      {item && item.type === "Exhibition" && (
-        <div key={item.id}>
-          <ItemImage
-            className="singleItem--img"
-            src={item.image_url}
-            alt="아이템 이미지"
-          />
+      {item && item.type === type.EXHIBITION && (
+        <SingleItemContainer key={item.id}>
+          <div className="img--div">
+            <ItemImage src={item.image_url} alt="아이템 이미지" />
+            <FaStar
+              className="bookmark--icon"
+              size="25"
+              color={isBookmark ? "#ffd361" : "#dfdfdf"}
+              onClick={handleBookmarkClick}
+              value={item.id}
+            />
+          </div>
           <ExhibitionItem>
             <p>{item.title}</p>
             <p>{item.sub_title}</p>
           </ExhibitionItem>
-        </div>
+        </SingleItemContainer>
       )}
-      {item && item.type === "Brand" && (
-        <div key={item.id}>
-          <ItemImage
-            className="singleItem--img"
-            src={item.brand_image_url}
-            alt="아이템 이미지"
-          />
+      {item && item.type === type.BRAND && (
+        <SingleItemContainer key={item.id}>
+          <div className="img--div">
+            <ItemImage src={item.brand_image_url} alt="아이템 이미지" />
+            <FaStar
+              className="bookmark--icon"
+              size="25"
+              color={isBookmark ? "#ffd361" : "#dfdfdf"}
+              onClick={handleBookmarkClick}
+              value={item.id}
+            />
+          </div>
           <ItemTitleContainer>
             <p>{item.brand_name}</p>
             <p>관심고객수</p>
@@ -132,8 +194,8 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
           <ItemPriceAndFollower>
             <p>{item.follower.toLocaleString("ko-KR")}</p>
           </ItemPriceAndFollower>
-        </div>
+        </SingleItemContainer>
       )}
-    </div>
+    </>
   );
 }
