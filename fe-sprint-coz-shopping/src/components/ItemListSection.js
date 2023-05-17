@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SingleItem from "./SingleItem";
 import styled from "styled-components";
 
@@ -9,9 +9,8 @@ const ItemsSection = styled.section`
   justify-content: center;
 `;
 
-const MainSectionTitlte = styled.h2`
-  margin: 0;
-  margin-top: 1rem;
+const MainSectionTitle = styled.h2`
+  margin: 0.5rem 0;
   padding-left: 2rem;
 `;
 
@@ -23,13 +22,13 @@ export default function ItemListSection({
 }) {
   return (
     <div>
-      <MainSectionTitlte>{sectionTitle}</MainSectionTitlte>
+      <MainSectionTitle>{sectionTitle}</MainSectionTitle>
       <ItemsSection>
         {items &&
           items.map((item) => {
             return (
               <SingleItem
-                className="singleItem"
+                key={item.id}
                 item={item}
                 bookmarkDatas={bookmarkDatas}
                 setBookmarkDatas={setBookmarkDatas}

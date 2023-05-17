@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 
 const SingleItemContainer = styled.div`
-  padding: 1rem;
+  padding: 0.2rem 1rem;
 `;
 
 const ItemImage = styled.img`
@@ -60,7 +60,7 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
   };
 
   useEffect(() => {
-    if (item && bookmarkDatas.includes(item.id)) {
+    if (bookmarkDatas && bookmarkDatas.includes(item.id)) {
       setIsBookmark(true);
     } else {
       setIsBookmark(false);
@@ -68,12 +68,10 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
   }, []);
 
   const handleBookmarkClick = (e) => {
+    let itemIdx = undefined;
     setIsBookmark(!isBookmark);
 
-    let itemIdx = undefined;
-    console.log(bookmarkDatas.length, item.id);
-
-    if (bookmarkDatas.length === 0) {
+    if (bookmarkDatas && bookmarkDatas.length === 0) {
       setBookmarkDatas([
         ...bookmarkDatas,
         {
@@ -90,30 +88,32 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
         },
       ]);
     } else {
-      for (let i = 0; i < bookmarkDatas.length; i++) {
-        console.log(bookmarkDatas[i].id);
-        if (bookmarkDatas[i].id === item.id) {
-          setBookmarkDatas(bookmarkDatas.filter((el) => el.id !== item.id));
-          itemIdx = i;
-          break;
+      if (bookmarkDatas && bookmarkDatas.length !== 0) {
+        for (let i = 0; i < bookmarkDatas.length; i++) {
+          if (bookmarkDatas[i].id === item.id) {
+            setBookmarkDatas(bookmarkDatas.filter((el) => el.id !== item.id));
+            itemIdx = i;
+
+            break;
+          }
         }
-      }
-      if (itemIdx === undefined) {
-        setBookmarkDatas([
-          ...bookmarkDatas,
-          {
-            id: item.id,
-            type: item.type,
-            title: item.title,
-            sub_title: item.sub_title,
-            brand_name: item.brand_name,
-            price: item.price,
-            discountPercentage: item.discountPercentage,
-            image_url: item.image_url,
-            brand_image_url: item.brand_image_url,
-            follower: item.follower,
-          },
-        ]);
+        if (itemIdx === undefined) {
+          setBookmarkDatas([
+            ...bookmarkDatas,
+            {
+              id: item.id,
+              type: item.type,
+              title: item.title,
+              sub_title: item.sub_title,
+              brand_name: item.brand_name,
+              price: item.price,
+              discountPercentage: item.discountPercentage,
+              image_url: item.image_url,
+              brand_image_url: item.brand_image_url,
+              follower: item.follower,
+            },
+          ]);
+        }
       }
     }
   };

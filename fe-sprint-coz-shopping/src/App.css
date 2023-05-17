@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: "Quicksand", sans-serif;
 }
 
@@ -24,7 +26,7 @@ a {
 /*Footer CSS*/
 
 footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
@@ -66,6 +68,9 @@ header {
 
   font-family: "Quicksand", sans-serif;
   box-shadow: 0 2px 10px rgb(168, 168, 168);
+  background-color: white;
+
+  z-index: 40;
 }
 
 .header--logo--div {
@@ -152,11 +157,20 @@ header {
 }
 .bookmark--icon {
   position: absolute;
-  right: 15px;
+  right: 10px;
   bottom: 15px;
 }
 
 .type--button--div {
   display: flex;
   flex-direction: row;
+}
+
+.products--list--div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
