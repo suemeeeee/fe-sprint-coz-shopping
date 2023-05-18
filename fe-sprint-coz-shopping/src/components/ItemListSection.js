@@ -10,8 +10,8 @@ const ItemsSection = styled.section`
 `;
 
 const MainSectionTitle = styled.h2`
-  margin: 0.5rem 0;
-  padding-left: 2rem;
+  margin: 1rem 0;
+  padding-left: 3.5rem;
 `;
 
 export default function ItemListSection({ sectionTitle, items }) {
