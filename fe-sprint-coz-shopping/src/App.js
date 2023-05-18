@@ -7,13 +7,10 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import axios from "axios";
 
-import { bookmark } from "./asset/state";
 import React, { useState, useEffect } from "react";
-import rootReducer from "./reducers";
 
 function App() {
   const [itemDatas, setItemDatas] = useState([]);
-  const [bookmarkDatas, setBookmarkDatas] = useState(bookmark.bookmarkedItems);
 
   useEffect(() => {
     axios
@@ -31,16 +28,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Main
-              itemDatas={itemDatas.slice(0, 4)}
-              bookmarkDatas={bookmarkDatas}
-              setBookmarkDatas={setBookmarkDatas}
-            />
-          }
-        />
+        <Route path="/" element={<Main itemDatas={itemDatas.slice(0, 4)} />} />
         <Route
           path="products/list"
           element={<ProductsList itemDatas={itemDatas} />}

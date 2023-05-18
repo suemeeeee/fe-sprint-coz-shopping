@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToBookmark, removeFromBookmark } from "../actions/index";
 
 const SingleItemContainer = styled.div`
   padding: 0.2rem 1rem;
@@ -49,7 +52,12 @@ const ExhibitionItem = styled.div`
   }
 `;
 
-export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
+export default function SingleItem({ item }) {
+  const bookmarkList = useSelector(
+    (state) => state.itemReducer.bookmarkedItems
+  );
+  const dispatch = useDispatch();
+
   const [isBookmark, setIsBookmark] = useState(false);
 
   const type = {
@@ -60,61 +68,20 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
   };
 
   useEffect(() => {
-    if (bookmarkDatas && bookmarkDatas.includes(item.id)) {
+    if (bookmarkList && bookmarkList.map((el) => el.id).includes(item.id)) {
       setIsBookmark(true);
     } else {
       setIsBookmark(false);
     }
   }, []);
 
-  const handleBookmarkClick = (e) => {
-    let itemIdx = undefined;
+  const handleBookmarkClick = (item) => {
     setIsBookmark(!isBookmark);
 
-    if (bookmarkDatas && bookmarkDatas.length === 0) {
-      setBookmarkDatas([
-        ...bookmarkDatas,
-        {
-          id: item.id,
-          type: item.type,
-          title: item.title,
-          sub_title: item.sub_title,
-          brand_name: item.brand_name,
-          price: item.price,
-          discountPercentage: item.discountPercentage,
-          image_url: item.image_url,
-          brand_image_url: item.brand_image_url,
-          follower: item.follower,
-        },
-      ]);
+    if (bookmarkList && !bookmarkList.map((el) => el.id).includes(item.id)) {
+      dispatch(addToBookmark(item));
     } else {
-      if (bookmarkDatas && bookmarkDatas.length !== 0) {
-        for (let i = 0; i < bookmarkDatas.length; i++) {
-          if (bookmarkDatas[i].id === item.id) {
-            setBookmarkDatas(bookmarkDatas.filter((el) => el.id !== item.id));
-            itemIdx = i;
-
-            break;
-          }
-        }
-        if (itemIdx === undefined) {
-          setBookmarkDatas([
-            ...bookmarkDatas,
-            {
-              id: item.id,
-              type: item.type,
-              title: item.title,
-              sub_title: item.sub_title,
-              brand_name: item.brand_name,
-              price: item.price,
-              discountPercentage: item.discountPercentage,
-              image_url: item.image_url,
-              brand_image_url: item.brand_image_url,
-              follower: item.follower,
-            },
-          ]);
-        }
-      }
+      dispatch(removeFromBookmark(item.id));
     }
   };
 
@@ -128,7 +95,9 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
               className="bookmark--icon"
               size="25"
               color={isBookmark ? "#ffd361" : "#dfdfdf"}
-              onClick={handleBookmarkClick}
+              onClick={() => {
+                handleBookmarkClick(item);
+              }}
             />
           </div>
           <ItemTitleContainer>
@@ -148,7 +117,9 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
               className="bookmark--icon"
               size="25"
               color={isBookmark ? "#ffd361" : "#dfdfdf"}
-              onClick={handleBookmarkClick}
+              onClick={() => {
+                handleBookmarkClick(item);
+              }}
               value={item.id}
             />
           </div>
@@ -165,7 +136,9 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
               className="bookmark--icon"
               size="25"
               color={isBookmark ? "#ffd361" : "#dfdfdf"}
-              onClick={handleBookmarkClick}
+              onClick={() => {
+                handleBookmarkClick(item);
+              }}
               value={item.id}
             />
           </div>
@@ -183,7 +156,9 @@ export default function SingleItem({ item, bookmarkDatas, setBookmarkDatas }) {
               className="bookmark--icon"
               size="25"
               color={isBookmark ? "#ffd361" : "#dfdfdf"}
-              onClick={handleBookmarkClick}
+              onClick={() => {
+                handleBookmarkClick(item);
+              }}
               value={item.id}
             />
           </div>

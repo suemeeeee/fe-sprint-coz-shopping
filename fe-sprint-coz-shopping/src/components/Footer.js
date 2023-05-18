@@ -4,10 +4,18 @@ export default function Footer() {
   return (
     <footer>
       <div className="footer--aTag">
-        <a href="https://www.codestates.com/terms/policy" target="_blank">
+        <a
+          href="https://www.codestates.com/terms/policy"
+          target="_blank"
+          rel="noreferrer"
+        >
           개인정보 처리방침 |&nbsp;
         </a>
-        <a href="https://www.codestates.com/terms/policy" target="_blank">
+        <a
+          href="https://www.codestates.com/terms/policy"
+          target="_blank"
+          rel="noreferrer"
+        >
           이용 약관
         </a>
       </div>

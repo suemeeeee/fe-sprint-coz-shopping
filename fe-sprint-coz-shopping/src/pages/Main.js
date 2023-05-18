@@ -1,21 +1,20 @@
 import React from "react";
-
 import ItemListSection from "../components/ItemListSection";
+import { useSelector } from "react-redux";
 
-export default function Main({ itemDatas, bookmarkDatas, setBookmarkDatas }) {
+export default function Main({ itemDatas }) {
+  const bookmarkList = useSelector(
+    (state) => state.itemReducer.bookmarkedItems
+  );
   return (
     <div>
       <ItemListSection
         sectionTitle="상품 리스트"
         items={itemDatas}
-        bookmarkDatas={bookmarkDatas}
-        setBookmarkDatas={setBookmarkDatas}
       ></ItemListSection>
       <ItemListSection
         sectionTitle="북마크 리스트"
-        items={bookmarkDatas.slice(0, 4)}
-        bookmarkDatas={bookmarkDatas}
-        setBookmarkDatas={setBookmarkDatas}
+        items={bookmarkList.slice(0, 4)}
       ></ItemListSection>
     </div>
   );

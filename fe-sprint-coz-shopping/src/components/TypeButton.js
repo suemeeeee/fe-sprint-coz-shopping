@@ -25,24 +25,24 @@ export default function TypeButton({ setCurrentType, type }) {
     <div>
       <div className="type--button--div">
         <SingleTypeButton value={type.ALL} onClick={handleTypeClick}>
-          <img src="../imgs/All.png"></img>
-          <a>전체</a>
+          <img src="../imgs/All.png" alt="버튼 이미지"></img>
+          <a href="#!">전체</a>
         </SingleTypeButton>
         <SingleTypeButton value={type.PRODUCT} onClick={handleTypeClick}>
-          <img src="../imgs/Product.png"></img>
-          <a>상품</a>
+          <img src="../imgs/Product.png" alt="버튼 이미지"></img>
+          <a href="#!">상품</a>
         </SingleTypeButton>
         <SingleTypeButton value={type.CATEGORY} onClick={handleTypeClick}>
-          <img src="../imgs/Category.png"></img>
-          <a>카테고리</a>
+          <img src="../imgs/Category.png" alt="버튼 이미지"></img>
+          <a href="#!"> 카테고리</a>
         </SingleTypeButton>
         <SingleTypeButton value={type.EXHIBITION} onClick={handleTypeClick}>
-          <img src="../imgs/Exhibition.png"></img>
-          <a>기획전</a>
+          <img src="../imgs/Exhibition.png" alt="버튼 이미지"></img>
+          <a href="#!">기획전</a>
         </SingleTypeButton>
         <SingleTypeButton value={type.BRAND} onClick={handleTypeClick}>
-          <img src="../imgs/Brand.png"></img>
-          <a>브랜드</a>
+          <img src="../imgs/Brand.png" alt="버튼 이미지"></img>
+          <a href="#!">브랜드</a>
         </SingleTypeButton>
       </div>
     </div>

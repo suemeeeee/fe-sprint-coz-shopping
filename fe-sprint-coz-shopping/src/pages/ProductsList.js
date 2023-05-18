@@ -11,11 +11,7 @@ const ItemsSection = styled.section`
   justify-content: center;
 `;
 
-export default function ProductsList({
-  itemDatas,
-  bookmarkDatas,
-  setBookmarkDatas,
-}) {
+export default function ProductsList({ itemDatas }) {
   const type = {
     ALL: "all",
     PRODUCT: "Product",
@@ -32,65 +28,30 @@ export default function ProductsList({
       <ItemsSection>
         {currentType === type.ALL &&
           itemDatas.map((item) => {
-            return (
-              <SingleItem
-                key={item.id}
-                item={item}
-                bookmarkDatas={bookmarkDatas}
-                setBookmarkDatas={setBookmarkDatas}
-              ></SingleItem>
-            );
+            return <SingleItem key={item.id} item={item}></SingleItem>;
           })}
         {currentType === type.PRODUCT &&
           itemDatas.map((item) => {
             if (item.type === type.PRODUCT) {
-              return (
-                <SingleItem
-                  key={item.id}
-                  item={item}
-                  bookmarkDatas={bookmarkDatas}
-                  setBookmarkDatas={setBookmarkDatas}
-                ></SingleItem>
-              );
+              return <SingleItem key={item.id} item={item}></SingleItem>;
             }
           })}
         {currentType === type.CATEGORY &&
           itemDatas.map((item) => {
             if (item.type === type.CATEGORY) {
-              return (
-                <SingleItem
-                  key={item.id}
-                  item={item}
-                  bookmarkDatas={bookmarkDatas}
-                  setBookmarkDatas={setBookmarkDatas}
-                ></SingleItem>
-              );
+              return <SingleItem key={item.id} item={item}></SingleItem>;
             }
           })}
         {currentType === type.EXHIBITION &&
           itemDatas.map((item) => {
             if (item.type === type.EXHIBITION) {
-              return (
-                <SingleItem
-                  key={item.id}
-                  item={item}
-                  bookmarkDatas={bookmarkDatas}
-                  setBookmarkDatas={setBookmarkDatas}
-                ></SingleItem>
-              );
+              return <SingleItem key={item.id} item={item}></SingleItem>;
             }
           })}
         {currentType === type.BRAND &&
           itemDatas.map((item) => {
             if (item.type === type.BRAND) {
-              return (
-                <SingleItem
-                  key={item.id}
-                  item={item}
-                  bookmarkDatas={bookmarkDatas}
-                  setBookmarkDatas={setBookmarkDatas}
-                ></SingleItem>
-              );
+              return <SingleItem key={item.id} item={item}></SingleItem>;
             }
           })}
       </ItemsSection>
