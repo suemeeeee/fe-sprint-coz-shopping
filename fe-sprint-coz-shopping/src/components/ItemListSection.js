@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SingleItem from "./SingleItem";
 import styled from "styled-components";
 
@@ -10,30 +10,18 @@ const ItemsSection = styled.section`
 `;
 
 const MainSectionTitle = styled.h2`
-  margin: 0.5rem 0;
-  padding-left: 2rem;
+  margin: 1rem 0;
+  padding-left: 3.5rem;
 `;
 
-export default function ItemListSection({
-  sectionTitle,
-  items,
-  bookmarkDatas,
-  setBookmarkDatas,
-}) {
+export default function ItemListSection({ sectionTitle, items }) {
   return (
     <div>
       <MainSectionTitle>{sectionTitle}</MainSectionTitle>
       <ItemsSection>
         {items &&
           items.map((item) => {
-            return (
-              <SingleItem
-                key={item.id}
-                item={item}
-                bookmarkDatas={bookmarkDatas}
-                setBookmarkDatas={setBookmarkDatas}
-              ></SingleItem>
-            );
+            return <SingleItem key={item.id} item={item}></SingleItem>;
           })}
       </ItemsSection>
     </div>

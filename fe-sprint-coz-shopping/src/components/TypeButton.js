@@ -1,49 +1,52 @@
-import React from "react";
-import styled from "styled-components";
-
-const SingleTypeButton = styled.button`
-  background-color: transparent;
-  border: none;
-
-  padding: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  & > a {
-    font-size: 1rem;
-  }
-`;
+import React, { useState } from "react";
+import { FilterButton } from "../buttons/FilterButton";
 
 export default function TypeButton({ setCurrentType, type }) {
+  const [currentButton, setCurrentButton] = useState("all");
+
   const handleTypeClick = (e) => {
     setCurrentType(e.currentTarget.getAttribute("value"));
+    setCurrentButton(e.currentTarget.value);
   };
+
   return (
     <div>
       <div className="type--button--div">
-        <SingleTypeButton value={type.ALL} onClick={handleTypeClick}>
-          <img src="../imgs/All.png"></img>
-          <a>전체</a>
-        </SingleTypeButton>
-        <SingleTypeButton value={type.PRODUCT} onClick={handleTypeClick}>
-          <img src="../imgs/Product.png"></img>
-          <a>상품</a>
-        </SingleTypeButton>
-        <SingleTypeButton value={type.CATEGORY} onClick={handleTypeClick}>
-          <img src="../imgs/Category.png"></img>
-          <a>카테고리</a>
-        </SingleTypeButton>
-        <SingleTypeButton value={type.EXHIBITION} onClick={handleTypeClick}>
-          <img src="../imgs/Exhibition.png"></img>
-          <a>기획전</a>
-        </SingleTypeButton>
-        <SingleTypeButton value={type.BRAND} onClick={handleTypeClick}>
-          <img src="../imgs/Brand.png"></img>
-          <a>브랜드</a>
-        </SingleTypeButton>
+        <FilterButton
+          value={type.ALL}
+          primary={currentButton === "all"}
+          label={"전체"}
+          imgSrc={"../imgs/All.png"}
+          onClick={handleTypeClick}
+        ></FilterButton>
+        <FilterButton
+          value={type.PRODUCT}
+          primary={currentButton === "Product"}
+          label={"상품"}
+          imgSrc={"../imgs/Product.png"}
+          onClick={handleTypeClick}
+        ></FilterButton>
+        <FilterButton
+          value={type.CATEGORY}
+          primary={currentButton === "Category"}
+          label={"카테고리"}
+          imgSrc={"../imgs/Category.png"}
+          onClick={handleTypeClick}
+        ></FilterButton>
+        <FilterButton
+          value={type.EXHIBITION}
+          primary={currentButton === "Exhibition"}
+          label={"기획전"}
+          imgSrc={"../imgs/Exhibition.png"}
+          onClick={handleTypeClick}
+        ></FilterButton>
+        <FilterButton
+          value={type.BRAND}
+          primary={currentButton === "Brand"}
+          label={"브랜드"}
+          imgSrc={"../imgs/Brand.png"}
+          onClick={handleTypeClick}
+        ></FilterButton>
       </div>
     </div>
   );

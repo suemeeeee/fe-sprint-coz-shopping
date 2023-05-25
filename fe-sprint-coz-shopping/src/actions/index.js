@@ -7,20 +7,20 @@ export const ENQUEUE_NOTIFICATION = "ENQUEUE_NOTIFICATION";
 export const DEQUEUE_NOTIFICATION = "DEQUEUE_NOTIFICATION";
 
 // actions creator functions
-export const addToBookmark = (itemId) => {
+export const addToBookmark = (item) => {
   return {
     type: ADD_TO_BOOKMARK,
     payload: {
-      id,
-      type,
-      title,
-      sub_title,
-      brand_name,
-      price,
-      discountPercentage,
-      image_url,
-      brand_image_url,
-      follower,
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      sub_title: item.sub_title,
+      brand_name: item.brand_name,
+      price: item.price,
+      discountPercentage: item.discountPercentage,
+      image_url: item.image_url,
+      brand_image_url: item.brand_image_url,
+      follower: item.follower,
     },
   };
 };

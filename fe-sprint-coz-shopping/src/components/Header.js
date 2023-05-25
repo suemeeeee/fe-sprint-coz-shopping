@@ -13,7 +13,7 @@ export default function Header() {
     <header>
       <div className="header--logo--div">
         <Link to="/">
-          <img src="../imgs/로고.png"></img>
+          <img src="../imgs/로고.png" alt="로고 이미지"></img>
         </Link>
         <Link to="/">
           <h1>COZ Shopping</h1>
