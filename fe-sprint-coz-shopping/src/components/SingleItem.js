@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
 import { CgClose } from "react-icons/cg";
+import { BookmarkButton } from "../BookmarkButton/BookmarkButton";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { addToBookmark, removeFromBookmark } from "../actions/index";
@@ -131,7 +132,7 @@ export default function SingleItem({ item }) {
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [isModalOn]);
+  }, [isModalOn, isBookmark]);
 
   const handleItemClick = (e) => {
     if (modalRef.current !== e.target) {
@@ -143,11 +144,12 @@ export default function SingleItem({ item }) {
 
   const handleBookmarkClick = (item) => {
     setIsBookmark(!isBookmark);
-
     if (bookmarkList && !bookmarkList.map((el) => el.id).includes(item.id)) {
       dispatch(addToBookmark(item));
+      console.log("북마크 추가");
     } else {
       dispatch(removeFromBookmark(item.id));
+      console.log("북마크 삭제");
     }
   };
 
@@ -166,14 +168,13 @@ export default function SingleItem({ item }) {
             color="white"
             onClick={handleItemClick}
           ></CgClose>
-          <FaStar
-            className="bookmark--icon"
-            size="25"
-            color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+          <BookmarkButton
+            primary={!isBookmark}
             onClick={() => {
               handleBookmarkClick(item);
             }}
-          />
+            modal={true}
+          ></BookmarkButton>
           {item.type === type.CATEGORY && <h2>#{item.title}</h2>}
           {item.type !== type.CATEGORY && <h2>{item.title}</h2>}
         </ModalContainer>
@@ -188,14 +189,13 @@ export default function SingleItem({ item }) {
             color="white"
             onClick={handleItemClick}
           ></CgClose>
-          <FaStar
-            className="bookmark--icon"
-            size="25"
-            color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+          <BookmarkButton
+            primary={!isBookmark}
             onClick={() => {
               handleBookmarkClick(item);
             }}
-          />
+            modal={true}
+          ></BookmarkButton>
           <h2>{item.brand_name}</h2>
         </ModalContainer>
       );
@@ -213,14 +213,12 @@ export default function SingleItem({ item }) {
               alt="아이템 이미지"
               ref={modalRef}
             />
-            <FaStar
-              className="bookmark--icon"
-              size="25"
-              color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+            <BookmarkButton
+              primary={!isBookmark}
               onClick={() => {
                 handleBookmarkClick(item);
               }}
-            />
+            ></BookmarkButton>
           </div>
           <ItemTitleContainer>
             <p>{item.title}</p>
@@ -239,15 +237,12 @@ export default function SingleItem({ item }) {
               alt="아이템 이미지"
               ref={modalRef}
             />
-            <FaStar
-              className="bookmark--icon"
-              size="25"
-              color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+            <BookmarkButton
+              primary={!isBookmark}
               onClick={() => {
                 handleBookmarkClick(item);
               }}
-              value={item.id}
-            />
+            ></BookmarkButton>
           </div>
           <ItemTitleContainer>
             <p># {item.title}</p>
@@ -262,15 +257,12 @@ export default function SingleItem({ item }) {
               alt="아이템 이미지"
               ref={modalRef}
             />
-            <FaStar
-              className="bookmark--icon"
-              size="25"
-              color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+            <BookmarkButton
+              primary={!isBookmark}
               onClick={() => {
                 handleBookmarkClick(item);
               }}
-              value={item.id}
-            />
+            ></BookmarkButton>
           </div>
           <ExhibitionItem>
             <p>{item.title}</p>
@@ -286,15 +278,12 @@ export default function SingleItem({ item }) {
               alt="아이템 이미지"
               ref={modalRef}
             />
-            <FaStar
-              className="bookmark--icon"
-              size="25"
-              color={isBookmark ? "var(--bookmarked)" : "var(--notBookmarked)"}
+            <BookmarkButton
+              primary={!isBookmark}
               onClick={() => {
                 handleBookmarkClick(item);
               }}
-              value={item.id}
-            />
+            ></BookmarkButton>
           </div>
           <ItemTitleContainer>
             <p>{item.brand_name}</p>
