@@ -1,8 +1,8 @@
-import { FilterButton as Template } from "./FilterButton";
+import { FilterButton } from "./FilterButton";
 
 export default {
   title: "Basic/Buttons",
-  component: Template,
+  component: FilterButton,
 };
 
 export const Primary = {
